@@ -1,0 +1,112 @@
+* Nand2Tetris
+** Boolean Functions/Gate Logic
+*** Commutative Laws
+(x AND y) = (y AND x)
+(x OR y) = (y OR x)
+*** Associative Laws
+(x AND (y AND z)) = ((x AND y) AND z)
+(x OR (y OR z)) = ((x OR y) OR z)
+*** Distibutive Laws
+(x AND (y OR z)) = (x AND y) OR (x AND z)
+(x OR (y AND z) = (x OR y) AND (x AND z)
+*** De Morgan Laws
+NOT(x AND y) = NOT(x) OR NOT(y)
+NOT(x OR y) = NOT(x) AND NOT(y)
+*** Derive Boolean Expression from Truth Table
+1. Create a function that fits each row with a value of 1
+
+| x | y | z | f |
+| 0 | 0 | 0 | 1 | > (NOT(x) AND NOT(y) AND NOT(z)
+| 0 | 0 | 1 | 0 | >
+| 0 | 1 | 0 | 1 | > (NOT(x) AND NOT(z)) AND y
+| 0 | 1 | 1 | 0 | >
+| 1 | 0 | 0 | 1 | > (x AND NOT(y) AND NOT(x))
+| 1 | 0 | 1 | 0 | >
+| 1 | 1 | 0 | 0 | >
+| 1 | 1 | 1 | 0 | >
+
+2. OR the functions together.
+(NOT(x) AND NOT(y) AND NOT(z) OR (NOT(x) AND NOT(z) AND y) OR (x AND NOT(y) AND NOT(x))
+*** NAND Function
+
+NOT(x AND x)
+Breaks out to:
+| x | y | f |
+| 0 | 0 | 1 |
+| 0 | 1 | 1 |
+| 1 | 0 | 1 |
+| 1 | 1 | 0 |
+
+*Any Boolean function can be represented using an expression with only NAND gates.*
+NOT(x) = (x NAND x)
+(x AND y) = NOT(x NAND y)
+
+**** Exercise: Find the logical equivalent of NAND:
+
+NAND(x,x)
+
+| x | y | f |
+| 0 | 0 | 1 | > NOT(x) AND NOT(y)
+| 0 | 1 | 1 | > NOT(x) AND y
+| 1 | 0 | 1 | > x AND NOT(y)
+| 1 | 1 | 0 |
+
+NOT(x)
+****
+****
+****
+****
+****
+****
+****
+****
+
+*** Gate Logic
+Technique for implementing Boolean functions
+**** Logic Gates - elementary or advanced
+Elementary gates - And, Or, Not (can all be built from Nand)
+Composite gates can be built from the elementary gates above
+*** Nand logic gate
+a -> | - - -
+     | Nand -> out
+b -> | - - -
+
+SPEC: if (a==1 and b==1) then out=0 else out=1
+*** Circut Implementations
+Realizing abstract gates in hardware
+Complete/not complete a circuit to 'turn on or off the light bulb'
+**
+**
+**
+**
+
+** Hardware Description Language - HDL
+*** HDL Example
+/** DOCUMENTATION */
+CHIP Xor {
+    IN a, b;
+    OUT out;
+
+    PARTS:
+    // Implementation
+    Nand(in=a,b, out=aNandb);
+    Or(in=a,b, out=aOrb);
+    And(in=aOrb,aNandb, out=out);
+}
+
+Programmer only needs the interface, builder needs the implementation
+
+**** Exercise: Implementation of Xor
+(NOT(x) OR NOT(y)) AND (x OR y)
+NOT(x AND y) AND (x OR y)
+
+*(x NAND y) AND (x OR y)*
+PARTS:
+Nand(in=a,b, out=aNandb);
+Or(in=a,b, out=aOrb);
+And(in=aOrb,aNandb, out=out);
+
+
+* Linear Algebra Foundations Frontiers
+* Haskell Book
+* HtC Simple Data
